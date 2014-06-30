@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mdpress -s forked -i images/ -a presentation.md
