@@ -10,11 +10,11 @@ imgs:
 # .git/objects
 
 imgs:
- - blob
- - tree
- - commit
- - branch
- - tag
+ - [ ] blob
+ - [ ] tree
+ - [ ] commit
+ - [ ] branch
+ - [ ] tag
 
 * git is distributed.
  * each repository lives alone, with full history.
@@ -47,13 +47,13 @@ imgs:
 # the Index and the Working Copy
 
 imgs:
- - .git/objects ; index ; fs
- - git add
- - git commit
- - git checkout
- - git reset
- - merge: trivial
- - merge: ff
+ - [ ] .git/objects ; index ; fs
+ - [ ] git add
+ - [ ] git commit
+ - [ ] git checkout
+ - [ ] git reset
+ - [ ] merge: trivial
+ - [ ] merge: ff
 
 * great, but what about your code
 
@@ -81,9 +81,9 @@ imgs:
 # remotes
 
 imgs:
- - network of remotes
- - fetch
- - push
+ - [ ] network of remotes
+ - [ ] fetch
+ - [ ] push
 
 * clones can talk to each other
 * remote: short name for a URL of another clone
