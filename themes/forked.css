@@ -196,6 +196,10 @@ h3 {
   margin: 1em auto;
 }
 
-#step-6 img {
+#step-5 p {
+  margin: 2em 0;
+}
+
+#step-6 img, #step-7 img, #step-8 img {
   float: right;
 }
