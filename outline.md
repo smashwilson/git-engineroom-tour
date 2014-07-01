@@ -1,3 +1,7 @@
+color key:
+
+* blob `#FFCC99`
+
 # intro
 
 imgs:
