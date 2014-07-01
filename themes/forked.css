@@ -203,3 +203,7 @@ h3 {
 #step-6 img, #step-7 img, #step-8 img {
   float: right;
 }
+
+#step-9 h2 {
+  float: right;
+}
