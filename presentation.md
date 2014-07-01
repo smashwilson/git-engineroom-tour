@@ -104,7 +104,7 @@ deflate-compressed.
 
 ### files you store in git become *blobs*
 
-![blob diagram](images/blob.svg)
+![blob diagram](images/blob.png)
 
 <!--
 format: "blob\t{size in bytes}\n{content}"
