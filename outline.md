@@ -1,11 +1,12 @@
 color key:
 
 * blob `#FFCC99`
+* tree `#99FF99`
 
 # intro
 
 imgs:
- - engine block
+ - [x] engine block
 
 * what this talk is and who it's for
 * git is weird and looks offputting!
@@ -14,8 +15,8 @@ imgs:
 # .git/objects
 
 imgs:
- - [ ] blob
- - [ ] tree
+ - [x] blob
+ - [x] tree
  - [ ] commit
  - [ ] branch
  - [ ] tag
