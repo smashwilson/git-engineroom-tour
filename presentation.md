@@ -118,7 +118,7 @@ no metadata: no filename, mode, whatever
 
 ### directories are stored as *trees*
 
-![tree diagram](images/tree.svg)
+![tree diagram](images/tree.png)
 
 <!--
 list of sha1 checksums of other tree objects or blobs
@@ -132,7 +132,7 @@ stored as simple, \0-separated records: kind, type, sha1, name
 
 ### *commits* are snapshots of the root tree at a particular point in time
 
-![commit diagram](images/commit.svg)
+![commit diagram](images/commit.png)
 
 <!--
 commits point to:
@@ -150,7 +150,7 @@ then these form a big graph. all git does is work with this graph!
 
 ### *branches* and *tags* store a commit's address
 
-![branch and tag diagram](images/branches.svg)
+![branch and tag diagram](images/branches.png)
 
 `.git/HEAD` is a *pointer to a branch*
 
