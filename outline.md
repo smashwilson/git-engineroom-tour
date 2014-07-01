@@ -3,6 +3,8 @@ color key:
 * blob `#FFCC99`
 * tree `#99FF99`
 * commit `#99FFFF`
+* branch `#FF9999`
+* tag `#FFFF99`
 
 # intro
 
@@ -19,8 +21,7 @@ imgs:
  - [x] blob
  - [x] tree
  - [x] commit
- - [ ] branch
- - [ ] tag
+ - [ ] branches
 
 * git is distributed.
  * each repository lives alone, with full history.

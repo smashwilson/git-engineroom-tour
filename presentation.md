@@ -152,7 +152,7 @@ then these form a big graph. all git does is work with this graph!
 
 ![branch and tag diagram](images/branches.png)
 
-`.git/HEAD` is a *pointer to a branch*
+### `.git/HEAD` is a *pointer to a branch*
 
 ## ... and that's basically everything
 
