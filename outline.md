@@ -2,6 +2,7 @@ color key:
 
 * blob `#FFCC99`
 * tree `#99FF99`
+* commit `#99FFFF`
 
 # intro
 
@@ -17,7 +18,7 @@ imgs:
 imgs:
  - [x] blob
  - [x] tree
- - [ ] commit
+ - [x] commit
  - [ ] branch
  - [ ] tag
 
