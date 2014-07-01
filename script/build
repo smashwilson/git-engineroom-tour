@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ROOT=`dirname $0`/..
+
+rm -rf ${ROOT}/presentation
+cd ${ROOT}
+mdpress -s forked -i images/ ${ROOT}/presentation.md
