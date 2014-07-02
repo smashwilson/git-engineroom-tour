@@ -21,7 +21,7 @@ imgs:
  - [x] blob
  - [x] tree
  - [x] commit
- - [ ] branches
+ - [x] branches
 
 * git is distributed.
  * each repository lives alone, with full history.
