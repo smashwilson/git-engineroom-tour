@@ -211,3 +211,7 @@ h3 {
 #step-9 h2 {
   float: right;
 }
+
+#step-10 p:nth-child(3) {
+  text-align: center;
+}
