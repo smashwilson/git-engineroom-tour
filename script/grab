@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# Grab any recently downloaded *.xml or *.png files from draw.io.
+
+ROOT=`dirname $0`/..
+
+mv -v ~/Downloads/*.xml ${ROOT}/image-src
+mv -v ~/Downloads/*.png ${ROOT}/images
