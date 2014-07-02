@@ -163,3 +163,89 @@ tag: just a marker
 HEAD tells git the "current branch" so it knows which one to move!
 it is literally a text file that holds "refs/heads/master"
 -->
+
+---
+=data-x="3000" data-y="2500"
+
+# the Index and the Working Copy
+
+while you're working, there are three places code can be:
+
+![three trees](images/three-trees.png)
+
+`git status` will tell you what's in each.
+
+<!--
+git has this thing called the "index" between HEAD and your code on disk.
+basically, this lets you make partial commits.
+-->
+
+---
+=data-x="3000" data-y="3500"
+
+# Working Copy -> Index
+
+![git add](images/git-add.png)
+
+`git add -- path/to/file`: stage one file at a time
+
+`git add -p`: stage diffs
+
+<!--
+"git add" moves changes from your working copy to the index.
+you can stage parts of files, the whole directory
+-->
+
+---
+=data-x="3000" data-y="4500"
+
+# Index -> .git/objects
+
+![git commit](images/git-commit.png)
+
+`git commit` persists the index in `.git/objects`, makes a new commit object,
+and points the `HEAD` branch to it.
+
+<!--
+"git commit" makes a new commit out of whatever you've staged with "git add".
+notice that it drags `HEAD` along with it.
+-->
+
+---
+=data-x="3000" data-y="5500"
+
+# .git/objects --> Working Copy
+
+![git checkout](images/git-checkout.png)
+
+`git checkout -- path/to/file`: check out a single file
+
+`git checkout -p`: check out individual diffs
+
+<!--
+"git checkout" turns your working copy (and index) into another state, like
+  a branch.
+if the state you name is a branch, it also moves HEAD!
+"detached HEAD" means "you checked out something that can't move"
+"git reset --hard" is similar: but it yanks HEAD along with you.
+-->
+
+---
+=data-x="4000" data-y="3000"
+
+# *Sidenote:* How to Name Things
+
+git gives you a bunch of ways to name commits.
+
+* giant 40-character sha1 checksums: `ca0d1ce34c23e9c2c875ae7c33a742e12ad1ff82`
+* any unique prefix: `ca0d1c`
+* branches or tags: `master`, `my-feature`
+* parent-of operator: `my-feature^`, `master^^`, `some-branch~5`
+* by time, absolute or relative: `master@{1 day ago}`
+* regexp search on commit messages: `:/broken`
+
+`git help rev-parse` has the full list!
+
+<!--
+almost all of the time you use ref names... but these other ones are handy too.
+-->
