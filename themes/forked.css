@@ -212,6 +212,7 @@ h3 {
   float: right;
 }
 
-#step-10 p:nth-child(3) {
+#step-10 p:nth-child(3), #step-11 p:nth-child(2), #step-12 p:nth-child(2),
+#step-13 p:nth-child(2) {
   text-align: center;
 }
