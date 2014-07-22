@@ -249,3 +249,86 @@ git gives you a bunch of ways to name commits.
 <!--
 almost all of the time you use ref names... but these other ones are handy too.
 -->
+
+---
+=data-x="3000" data-y="7500"
+
+# Merging
+
+a *merge* is how you unify work from two *(or more)* branches.
+
+in essence, `git merge` means:
+
+> "Make the branch I'm on right now also include the work of this other thing I name."
+
+what actually happens during the merge depends entirely on **the topography** of history between
+*where you are* and *what you're merging in*.
+
+---
+=data-x="3000" data-y="8500"
+
+# Merging: Trivial Cases
+
+## "Nothing to merge"
+
+when the branch you're on is already a **direct descendant** of the branch you're merging in.
+
+---
+=data-x="3000" data-y="8500"
+
+# Merging: Trivial Cases
+
+## "Fast-forward merge"
+
+when the branch you're on is a **direct ancestor** of the branch you're merging in.
+
+---
+=data-x="3000" data-y="9500"
+
+# Merging: Recursive
+
+this is the most common non-trivial case: a **three-way merge**.
+
+the end result is a **new commit** with two parents: the previous `HEAD` and the commit that you
+gave to `git merge`.
+
+---
+=data-x="3000" data-y="10500"
+
+# Merging: Conflicts
+
+if both lines of work modify the same part of the same file, you get a conflict:
+
+```php
+one
+one
+<<<<<<< HEAD
+one, changed on master
+=======
+one, changed on branch
+>>>>>>> branch
+one
+one
+```
+
+to *resolve* it:
+
+1. edit the file to the state you want
+2. `git add path/to/resolved-file`
+3. `git commit` to finalize the merge
+
+---
+=data-x="3000" data-y="11500"
+
+# Rebasing
+
+an alternative to merging is to **rebase**.
+
+`git rebase` means:
+
+> "Make it look like this other work was already done before I started mine."
+
+---
+=data-x="3000" data-y="11500"
+
+# Rebasing
