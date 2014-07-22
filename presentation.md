@@ -273,6 +273,8 @@ what actually happens during the merge depends entirely on **the topography** of
 
 when the branch you're on is already a **direct descendant** of the branch you're merging in.
 
+![nothing to merge](images/nothing-to-merge.png)
+
 ---
 =data-x="3000" data-y="8500"
 
@@ -281,6 +283,8 @@ when the branch you're on is already a **direct descendant** of the branch you'r
 ## "Fast-forward merge"
 
 when the branch you're on is a **direct ancestor** of the branch you're merging in.
+
+![fast-forward merge](images/fast-forward-merge.png)
 
 ---
 =data-x="3000" data-y="9500"
@@ -291,6 +295,13 @@ this is the most common non-trivial case: a **three-way merge**.
 
 the end result is a **new commit** with two parents: the previous `HEAD` and the commit that you
 gave to `git merge`.
+
+---
+=data-x="3000" data-y="9500"
+
+# Merging: Recursive
+
+![recursive merge](images/recursive-merge.png)
 
 ---
 =data-x="3000" data-y="10500"
@@ -332,3 +343,5 @@ an alternative to merging is to **rebase**.
 =data-x="3000" data-y="11500"
 
 # Rebasing
+
+![git rebase](images/rebasing.png)
