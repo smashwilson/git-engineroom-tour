@@ -231,7 +231,7 @@ if the state you name is a branch, it also moves HEAD!
 -->
 
 ---
-=data-x="4000" data-y="3000"
+=data-x="2500" data-y="6500"
 
 # *Sidenote:* How to Name Things
 
