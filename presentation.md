@@ -57,6 +57,11 @@ and finally touch on some more philosophic points.
 
 # The Object Database
 
+<!--
+this is how git stores things internally.
+everything else in git works by interacting with these constructs.
+-->
+
 ---
 =data-x="2000" data-y="2500" id="dotgit"
 
@@ -433,6 +438,10 @@ notice that the new commits have different parents than the old ones.
 
 # Remotes
 
+<!--
+now we're going to actually touch the network.
+-->
+
 ---
 =data-x="4000" data-y="3500" id="network-of-clones"
 
@@ -547,6 +556,10 @@ it'll also update a remote ref.
 =data-x="5000" data-y="1500" data-scale="2" id="git-way-title"
 
 # the Git Way
+
+<!--
+a few more philosophical points about effective git usage.
+-->
 
 ---
 =data-x="5000" data-y="2500" id="small-commits"
