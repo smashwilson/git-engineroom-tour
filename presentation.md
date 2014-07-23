@@ -446,6 +446,15 @@ some clones are **bare** clones, meaning they have no working copy.
 
 a **remote** is just shorthand for the URL of another clone somewhere.
 
+<!--
+git provides a way to get eventual consistency around this whole graph.
+"work" here means commits and trees and blobs and refs.
+clones with a working copy are for getting work done;
+  bare clones are access points for sharing.
+every git clone carries a pointer to the one that it was created from called "origin."
+the clones in the network don't *have* to share history, but it's helpful when they do!
+-->
+
 ---
 =data-x="4000" data-y="4500" id="remote-tracking"
 
@@ -463,6 +472,14 @@ called **remote-tracking branches**.
 
 *(usually you can name these as `origin/master`)*
 
+<!--
+these are just refs like your own branches.
+they are read-only! if you check one out directly, you'll see a "detached HEAD" message.
+instead, you can:
+- merge them in
+- rebase on top of them
+-->
+
 ---
 =data-x="4000" data-y="5500" id="fetch"
 
@@ -476,6 +493,15 @@ called **remote-tracking branches**.
 
 does **not** touch local branches until you `git merge origin/master`.
 
+<!--
+"somewhere" is a remote name or a full URL.
+"something" is a remote branch name or a "refspec".
+- usually you leave it off to get "everything".
+git fetch will never trash your local work in any way.
+all it does is pull more data in.
+then, you can diff it, merge it, rebase it, whatever your workflow is.
+-->
+
 ---
 =data-x="4000" data-y="6500" id="pull"
 
@@ -486,6 +512,17 @@ does **not** touch local branches until you `git merge origin/master`.
 convenient shortcut that combines a fetch and merge.
 
 local branches can also **track** another branch, to always pull from the same place.
+
+<!--
+some people will tell you to never pull and always fetch + merge.
+really though, it's just a way to save keystrokes for something you're going to do anyway.
+i would say: don't pull until you understand it :-)
+you can also do `git pull --rebase`, `git pull --ff-only`, `git pull --no-ff`, ...
+there is one difference: remote tracking branches are not updated when you pull directly.
+  instead FETCH_HEAD is.
+tracking is a big source of confusion. really it's just a configuration switch that says:
+"what do i do when someone runs `git pull` without args on this branch?"
+-->
 
 ---
 =data-x="4000" data-y="7500" id="push"
@@ -499,6 +536,12 @@ local branches can also **track** another branch, to always pull from the same p
 > "send everything new to another clone."
 
 generally, you only push to *bare clones*.
+
+<!--
+push new work somewhere else, so someone else can pull it later.
+it'll also update a remote ref.
+"-u" or "--upstream" marks this as the new "upstream" and starts tracking it.
+-->
 
 ---
 =data-x="5000" data-y="1500" data-scale="2" id="git-way-title"
@@ -520,6 +563,18 @@ in git, `commit` *records* a state, while `push` *shares* a state
 
  * *communicate* through history
 
+<!--
+beginners tend to ignore the index, work for a month, and jam everything in one giant commit.
+all of git's tooling works better when you commit in smaller chunks.
+- following someone's work through a PR
+- git bisect
+- merging works more reliably
+- lots of git commands only work with a clean working directory
+think about committing as "making changes to advance state", not "this state is good"
+also: .git/objects is *write-only* in normal operations.
+the *only way* i have seen lost data in git is when someone is too afraid to commit.
+-->
+
 ---
 =data-x="5000" data-y="3500" id="public-history"
 
@@ -531,6 +586,15 @@ don't rewrite history that's "public".
 
 "public" may mean different things depending on your team's workflow!
 
+<!--
+anything that changes existing commits changes history:
+- git commit --amend, git rebase, git filter-branch are the usual suspects.
+a simple, conservative approach is "don't rebase it if it's pushed".
+really it's "don't rebase it if someone else is using it".
+- rebase "my-feature-branch" all you want; don't rebase "dev"
+- on your own private fork? do whatever you want
+-->
+
 ---
 =data-x="5000" data-y="4500" id="branch-like-mad"
 
@@ -541,6 +605,14 @@ git branches are cheap and disposable.
 do separate work on separate branches!
 
 pay attention to *where you are* when you commit.
+
+<!--
+want to try something quick? make a local branch. doesn't work? kill it
+most git workflows isolate features to individual branches. this is helpful!
+don't make pull requests from master -> master; do my-feature -> master instead.
+- that way you can easily make more before you're accepted!
+- make sure you start new ones at `upstream/master`.
+-->
 
 ---
 =data-x="5000" data-y="5500" id="github-flow"
@@ -556,6 +628,17 @@ alternatives exist! pick one that meets your needs and run with it. things to co
 * what does it mean for code to be in different branches?
 * merging or rebasing when it's time to integrate?
 * how hard is it for newcomers to contribute?
+
+<!--
+prime opportunity for bikeshedding, just like tabs vs. spaces.
+GitHub flow is roughly:
+* master is always ready for deployment. or, actually deployed.
+* feature branch.
+* make pull requests early, for discussion.
+* merge when they're ready.
+"git flow" is another, which is more suited for doing the tagged release thing.
+(much heavier-weight though.)
+-->
 
 ---
 =data-x="6000" data-scale="3" data-rotate-y="180" id="questions"
