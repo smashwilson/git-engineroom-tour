@@ -58,8 +58,8 @@ imgs:
  - [x] git add
  - [x] git commit
  - [x] git checkout
- - [ ] nothing-to-merge
- - [ ] fast-forward-merge
+ - [x] nothing-to-merge
+ - [x] fast-forward-merge
  - [ ] recursive-merge
  - [ ] rebasing
 
