@@ -264,6 +264,16 @@ in essence, `git merge` means:
 what actually happens during the merge depends entirely on **the topography** of history between
 *where you are* and *what you're merging in*.
 
+<!--
+git is really good at merging things.
+a lot of the time, it Just Works. it's still helpful to know what's going on to reason about it.
+commit parent pointers == "this work builds on this other work"
+
+does *not* depend on:
+- timestamps
+- in which clone commits happen
+-->
+
 ---
 =data-x="3000" data-y="8500"
 
@@ -274,6 +284,12 @@ what actually happens during the merge depends entirely on **the topography** of
 when the branch you're on is already a **direct descendant** of the branch you're merging in.
 
 ![nothing to merge](images/nothing-to-merge.png)
+
+<!--
+because your parent pointers already lead to the commit you're trying to merge,
+  your work *already includes* the other work.
+so, there's nothing to do.
+-->
 
 ---
 =data-x="3000" data-y="8500"
@@ -286,6 +302,16 @@ when the branch you're on is a **direct ancestor** of the branch you're merging 
 
 ![fast-forward merge](images/fast-forward-merge.png)
 
+<!--
+you can suppress this with the `--no-ff` flag (and always make a new merge commit)
+  pull requests on GitHub do this.
+  important sometimes because you *want* to say "i merged this" in your history.
+you can force *only* this to happen with `--ff-only`.
+  merge will fail if it's not trivial.
+  say, if you're on "master" and you never want to have any local work.
+sidenote: these are the only merges that can happen in a bare clone!
+-->
+
 ---
 =data-x="3000" data-y="9500"
 
@@ -296,12 +322,32 @@ this is the most common non-trivial case: a **three-way merge**.
 the end result is a **new commit** with two parents: the previous `HEAD` and the commit that you
 gave to `git merge`.
 
+<!--
+the new commit is important:
+- it memorializes that you did this merge in the logs.
+- it makes the history graph correct for further merges!
+other "merge strategies" are available: ours, theirs, octopus
+-->
+
 ---
 =data-x="3000" data-y="9500"
 
 # Merging: Recursive
 
 ![recursive merge](images/recursive-merge.png)
+
+<!--
+here's how a three-way merge works:
+- walk up commit parent pointers to find the common ancestor
+- compare diffs from the common ancestor to the top, bottom
+- where only one side did a thing: apply that thing
+- where both sides did a thing: conflict time
+then the new commit goes on the end.
+files are tracked by *content*, not *path* (80% similarity)
+- seamless rename detection!
+"recursive" because, if the common ancestor is ambiguous, you do a "shadow merge" with the
+  candidates first
+-->
 
 ---
 =data-x="3000" data-y="10500"
@@ -328,6 +374,13 @@ to *resolve* it:
 2. `git add path/to/resolved-file`
 3. `git commit` to finalize the merge
 
+<!--
+you can just eye it up, or there are a bunch of tools that make this easier.
+kdiff3, meld, ...
+(or my Atom package ;-) )
+"git status" will remind you how to continue if you forget!
+-->
+
 ---
 =data-x="3000" data-y="11500"
 
@@ -339,9 +392,33 @@ an alternative to merging is to **rebase**.
 
 > "Make it look like this other work was already done before I started mine."
 
+<!--
+merge v. rebase is a purely aesthetic workflow choice.
+  i'll get into when either is "appropriate" later.
+lots of bikeshedding about this.
+why would you ever do this?
+- it keeps your history legible! a straight line instead of a bunch of back-and-forth.
+- no extra merge commit.
+-->
+
 ---
 =data-x="3000" data-y="11500"
 
 # Rebasing
 
 ![git rebase](images/rebasing.png)
+
+<!--
+here's how a rebase works:
+- check out the target branch
+- "play back" (meaning create new) commits from ancestor -> former HEAD, one at a time
+- if any conflict: stop; stage; git rebase --continue
+notice that the new commits have different parents than the old ones.
+  so, they have *different names* and are *different commits*
+  rebase *rewrites history!*
+`rebase -i` opens $EDITOR with a list of commits.
+- you can delete some, move them around, smash them together
+- basically a Swiss army knife for mucking with history
+- very very powerful
+- also a good way to check that you're rebasing the right stuff
+-->
