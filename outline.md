@@ -60,8 +60,8 @@ imgs:
  - [x] git checkout
  - [x] nothing-to-merge
  - [x] fast-forward-merge
- - [ ] recursive-merge
- - [ ] rebasing
+ - [x] recursive-merge
+ - [x] rebasing
 
 * great, but what about your code
 
@@ -89,7 +89,7 @@ imgs:
 # remotes
 
 imgs:
- - [ ] clone-network
+ - [x] clone-network
  - [ ] git-fetch
  - [ ] git-push
 
