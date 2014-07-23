@@ -197,7 +197,7 @@ h3 {
 }
 
 blockquote {
-  font-family: serif;
+  font-style: italic;
 }
 
 #object-database-title h1, #index-working-copy-title h1, #remotes-title h1, #git-way-title h1 {
@@ -223,4 +223,9 @@ blockquote {
 #three-trees p:nth-child(3), #add p:nth-child(2), #committing p:nth-child(2),
 #checkout p:nth-child(2) {
   text-align: center;
+}
+
+#merge h1, #nothing-to-merge h1, #fast-forward h1, #recursive h1, #recursive-img h1,
+#rebase h1, #rebase-img h1, #remote-tracking h1, #pull h1 {
+  margin-bottom: 1em;
 }
