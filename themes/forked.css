@@ -196,6 +196,14 @@ h3 {
   margin: 1em auto;
 }
 
+blockquote {
+  font-family: serif;
+}
+
+#object-database-title h1, #index-working-copy-title h1, #remotes-title h1, #git-way-title h1 {
+  margin: 10% auto;
+}
+
 #objects p {
   margin: 2em 0;
 }
