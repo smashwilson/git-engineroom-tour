@@ -54,13 +54,14 @@ imgs:
 # the Index and the Working Copy
 
 imgs:
- - [ ] .git/objects ; index ; fs
- - [ ] git add
- - [ ] git commit
- - [ ] git checkout
- - [ ] git reset
+ - [x] .git/objects ; index ; fs
+ - [x] git add
+ - [x] git commit
+ - [x] git checkout
  - [ ] merge: trivial
  - [ ] merge: ff
+ - [ ] merge: recursive
+ - [ ] rebase
 
 * great, but what about your code
 
