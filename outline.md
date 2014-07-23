@@ -58,10 +58,10 @@ imgs:
  - [x] git add
  - [x] git commit
  - [x] git checkout
- - [ ] merge: trivial
- - [ ] merge: ff
- - [ ] merge: recursive
- - [ ] rebase
+ - [ ] nothing-to-merge
+ - [ ] fast-forward-merge
+ - [ ] recursive-merge
+ - [ ] rebasing
 
 * great, but what about your code
 
@@ -89,9 +89,9 @@ imgs:
 # remotes
 
 imgs:
- - [ ] network of remotes
- - [ ] fetch
- - [ ] push
+ - [ ] clone-network
+ - [ ] git-fetch
+ - [ ] git-push
 
 * clones can talk to each other
 * remote: short name for a URL of another clone
