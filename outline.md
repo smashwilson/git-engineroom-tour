@@ -90,8 +90,8 @@ imgs:
 
 imgs:
  - [x] clone-network
- - [ ] git-fetch
- - [ ] git-push
+ - [x] git-fetch
+ - [x] git-push
 
 * clones can talk to each other
 * remote: short name for a URL of another clone
