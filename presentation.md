@@ -1,6 +1,7 @@
 ---
 title: Git, the Engine Room Tour
 ---
+=id="title"
 
 # Git: The Engine Room Tour
 
@@ -15,7 +16,7 @@ not a laundry list of git commands
 -->
 
 ---
-=data-y="1000"
+=data-y="1000" id="weird"
 
 ## Git is *weird*.
 
@@ -35,7 +36,7 @@ you're not alone!
 -->
 
 ---
-=data-y="2000"
+=data-y="2000" id="outline"
 
 # Outline
 
@@ -52,7 +53,7 @@ and finally touch on some more philosophic points.
 -->
 
 ---
-=data-x="2000" data-y="2500"
+=data-x="2000" data-y="2500" id="dotgit"
 
 # .git
 
@@ -62,12 +63,6 @@ and finally touch on some more philosophic points.
 * your **full history**
 * **branches**, **tags**, the works
 
-### some terminology:
-
-Each git repository is called a *clone*.
-
-*bare* clones don't have a working copy.
-
 <!--
 git is distributed, so every repository is independent and self-contained.
 just about everything is plain-text, maybe compressed.
@@ -75,7 +70,7 @@ if you're brave, you can drive git using nothing but a text editor!
 -->
 
 ---
-=data-x="2000" data-y="3500"
+=data-x="2000" data-y="3500" id="objects"
 
 # .git/objects
 
@@ -98,7 +93,7 @@ deflate-compressed.
 -->
 
 ---
-=data-x="2000" data-y="4500"
+=data-x="2000" data-y="4500" id="blobs"
 
 # .git/objects: blobs
 
@@ -112,7 +107,7 @@ no metadata: no filename, mode, whatever
 -->
 
 ---
-=data-x="2000" data-y="5500"
+=data-x="2000" data-y="5500" id="trees"
 
 # .git/objects: trees
 
@@ -126,7 +121,7 @@ stored as simple, \0-separated records: kind, type, sha1, name
 -->
 
 ---
-=data-x="2000" data-y="6500"
+=data-x="2000" data-y="6500" id="commits"
 
 # .git/objects: commits
 
@@ -144,7 +139,7 @@ then these form a big graph. all git does is work with this graph!
 -->
 
 ---
-=data-x="2000" data-y="7500"
+=data-x="2000" data-y="7500" id="refs"
 
 # .git/refs: branches and tags
 
@@ -165,7 +160,7 @@ it is literally a text file that holds "refs/heads/master"
 -->
 
 ---
-=data-x="3000" data-y="2500"
+=data-x="3000" data-y="2500" id="three-trees"
 
 # the Index and the Working Copy
 
@@ -181,7 +176,7 @@ basically, this lets you make partial commits.
 -->
 
 ---
-=data-x="3000" data-y="3500"
+=data-x="3000" data-y="3500" id="add"
 
 # Working Copy -> Index
 
@@ -197,7 +192,7 @@ you can stage parts of files, the whole directory
 -->
 
 ---
-=data-x="3000" data-y="4500"
+=data-x="3000" data-y="4500" id="committing"
 
 # Index -> .git/objects
 
@@ -212,7 +207,7 @@ notice that it drags `HEAD` along with it.
 -->
 
 ---
-=data-x="3000" data-y="5500"
+=data-x="3000" data-y="5500" id="checkout"
 
 # .git/objects --> Working Copy
 
@@ -231,7 +226,7 @@ if the state you name is a branch, it also moves HEAD!
 -->
 
 ---
-=data-x="2500" data-y="6500"
+=data-x="2500" data-y="6500" id="naming"
 
 # *Sidenote:* How to Name Things
 
@@ -251,7 +246,7 @@ almost all of the time you use ref names... but these other ones are handy too.
 -->
 
 ---
-=data-x="3000" data-y="7500"
+=data-x="3000" data-y="7500" id="merge"
 
 # Merging
 
@@ -275,7 +270,7 @@ does *not* depend on:
 -->
 
 ---
-=data-x="3000" data-y="8500"
+=data-x="3000" data-y="8500" id="nothing-to-merge"
 
 # Merging: Trivial Cases
 
@@ -292,7 +287,7 @@ so, there's nothing to do.
 -->
 
 ---
-=data-x="3000" data-y="8500"
+=data-x="3000" data-y="8500" id="fast-forward"
 
 # Merging: Trivial Cases
 
@@ -313,7 +308,7 @@ sidenote: these are the only merges that can happen in a bare clone!
 -->
 
 ---
-=data-x="3000" data-y="9500"
+=data-x="3000" data-y="9500" id="recursive"
 
 # Merging: Recursive
 
@@ -330,7 +325,7 @@ other "merge strategies" are available: ours, theirs, octopus
 -->
 
 ---
-=data-x="3000" data-y="9500"
+=data-x="3000" data-y="9500" id="recursive-img"
 
 # Merging: Recursive
 
@@ -350,7 +345,7 @@ files are tracked by *content*, not *path* (80% similarity)
 -->
 
 ---
-=data-x="3000" data-y="10500"
+=data-x="3000" data-y="10500" id="conflict"
 
 # Merging: Conflicts
 
@@ -382,7 +377,7 @@ kdiff3, meld, ...
 -->
 
 ---
-=data-x="3000" data-y="11500"
+=data-x="3000" data-y="11500" id="rebase"
 
 # Rebasing
 
@@ -402,7 +397,7 @@ why would you ever do this?
 -->
 
 ---
-=data-x="3000" data-y="11500"
+=data-x="3000" data-y="11500" id="rebase-img"
 
 # Rebasing
 
