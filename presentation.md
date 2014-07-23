@@ -504,3 +504,71 @@ generally, you only push to *bare clones*.
 =data-x="5000" data-y="1500" data-scale="2" id="git-way-title"
 
 # the Git Way
+
+---
+=data-x="5000" data-y="2500" id="small-commits"
+
+# 1. many small commits
+
+in git, `commit` *records* a state, while `push` *shares* a state
+
+ * don't wait to be "done" before you commit!
+
+ * don't "shotgun commit"
+
+ * commit *complete thoughts*
+
+ * *communicate* through history
+
+---
+=data-x="5000" data-y="3500" id="public-history"
+
+# 2. don't change public history
+
+a variety of git commands will *rewrite history*.
+
+don't rewrite history that's "public".
+
+"public" may mean different things depending on your team's workflow!
+
+---
+=data-x="5000" data-y="4500" id="branch-like-mad"
+
+# 3. branches are your friends
+
+git branches are cheap and disposable.
+
+do separate work on separate branches!
+
+pay attention to *where you are* when you commit.
+
+---
+=data-x="5000" data-y="5500" id="github-flow"
+
+# 4. pick a workflow
+## ...and roll with it
+
+I'm personally fond of [the GitHub flow](https://guides.github.com/introduction/flow/index.html). it's
+great for continuous delivery or continuous deployment.
+
+alternatives exist! pick one that meets your needs and run with it. things to consider:
+
+* what does it mean for code to be in different branches?
+* merging or rebasing when it's time to integrate?
+* how hard is it for newcomers to contribute?
+
+---
+=data-x="6000" data-scale="3" data-rotate-y="180" id="questions"
+
+# Questions?
+
+## resources and links
+
+* [Pro Git](http://git-scm.com/book/en/) by Scott Chacon
+* [GitHub help](https://help.github.com/) for git and GitHub help
+* [git ready](http://gitready.com/) for bite-sized git tips and tricks
+* [try git](https://try.github.io/) for an interactive step-by-step tutorial
+
+send me issues or pull requests at:
+
+https://github.com/smashwilson/git-engineroom-tour
