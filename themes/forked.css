@@ -196,23 +196,23 @@ h3 {
   margin: 1em auto;
 }
 
-#step-5 p {
+#objects p {
   margin: 2em 0;
 }
 
-#step-6 img, #step-7 img, #step-8 img {
+#blobs img, #trees img, #commits img {
   float: right;
 }
 
-#step-9 p {
+#refs p {
   text-align: center;
 }
 
-#step-9 h2 {
+#refs h2 {
   float: right;
 }
 
-#step-10 p:nth-child(3), #step-11 p:nth-child(2), #step-12 p:nth-child(2),
-#step-13 p:nth-child(2) {
+#three-trees p:nth-child(3), #add p:nth-child(2), #committing p:nth-child(2),
+#checkout p:nth-child(2) {
   text-align: center;
 }
