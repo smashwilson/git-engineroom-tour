@@ -422,3 +422,75 @@ notice that the new commits have different parents than the old ones.
 - very very powerful
 - also a good way to check that you're rebasing the right stuff
 -->
+
+---
+=data-x="4000" data-y="2500" id="remotes"
+
+# Remotes
+
+---
+=data-x="4000" data-y="3500" id="network-of-clones"
+
+# A Network of Clones
+
+git clones can shuttle work to and from other clones by URL.
+
+![network of clones](images/clone-network.png)
+
+some clones are **bare** clones, meaning they have no working copy.
+
+a **remote** is just shorthand for the URL of another clone somewhere.
+
+---
+=data-x="4000" data-y="4500" id="remote-tracking"
+
+# remote-tracking branches
+
+the last-known state of branches in other clones is tracked by special refs
+called **remote-tracking branches**.
+
+```php
+.git/refs/remotes/origin/master
+.git/refs/remotes/origin/otherbranch
+.git/refs/remotes/upstream/master
+.git/refs/remotes/upstream/work-it
+```
+
+*(usually you can name these as `origin/master`)*
+
+---
+=data-x="4000" data-y="5500" id="fetch"
+
+# git fetch
+
+`git fetch &lt;somewhere&gt; &lt;something&gt;`
+
+![git-fetch](images/git-fetch.png)
+
+> "download anything new from another clone and update my remote-tracking branches."
+
+does **not** touch local branches until you `git merge origin/master`.
+
+---
+=data-x="4000" data-y="6500" id="pull"
+
+# git pull
+
+`git pull &lt;somewhere&gt; &lt;something&gt;`
+
+convenient shortcut that combines a fetch and merge.
+
+local branches can also **track** another branch, to always pull from the same place.
+
+---
+=data-x="4000" data-y="7500" id="push"
+
+# git push
+
+`git push &lt;somewhere&gt; &lt;something&gt;`
+
+![git-push](images/git-push.png)
+
+> "send everything new to another clone."
+
+generally, you only push to *bare clones*.
