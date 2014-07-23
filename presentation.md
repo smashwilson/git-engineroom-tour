@@ -53,6 +53,11 @@ and finally touch on some more philosophic points.
 -->
 
 ---
+=data-x="2000" data-y="1500" data-scale="2" id="object-database-title"
+
+# The Object Database
+
+---
 =data-x="2000" data-y="2500" id="dotgit"
 
 # .git
@@ -158,6 +163,11 @@ tag: just a marker
 HEAD tells git the "current branch" so it knows which one to move!
 it is literally a text file that holds "refs/heads/master"
 -->
+
+---
+=data-x="3000" data-y="1500" data-scale="2" id="index-working-copy-title"
+
+# the Index and the Working Copy
 
 ---
 =data-x="3000" data-y="2500" id="three-trees"
@@ -419,7 +429,7 @@ notice that the new commits have different parents than the old ones.
 -->
 
 ---
-=data-x="4000" data-y="2500" id="remotes"
+=data-x="4000" data-y="1500" data-scale="2" id="remotes-title"
 
 # Remotes
 
@@ -489,3 +499,8 @@ local branches can also **track** another branch, to always pull from the same p
 > "send everything new to another clone."
 
 generally, you only push to *bare clones*.
+
+---
+=data-x="5000" data-y="1500" data-scale="2" id="git-way-title"
+
+# the Git Way
