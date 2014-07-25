@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Git, the Engine Room Tour</title>
+    <link href="css/reset.css" rel="stylesheet" />
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="shortcut icon" href="css/favicon.png" />
+    <link rel="apple-touch-icon" href="css/apple-touch-icon.png" />
+    <!-- Code Prettifier: -->
+<link href="css/highlight.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,900" rel="stylesheet" />
+
+  </head>
+
+  <body>
+  <div class="fallback-message">
+  <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+  <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+  </div>
+    <div id="impress">
+    <div class='step' id="title">
+    
+<h1>Git: The Engine Room Tour</h1>
+
+<p><img src="images/RR_Merlin_labeled.jpg" alt="an engine"></p>
+
+<p><em>Ash Wilson, Rackspace, DRG</em></p>
+
+<!--
+intended for people who use git, but are somewhat mystified by it
+not an introduction: that would be a half-day workshop or so
+not a laundry list of git commands
+-->
+</div>
+      <div class='step' data-y="1000" id="weird">
+    
+<h2>Git is <em>weird</em>.</h2>
+
+<p>No, really.</p>
+
+<ul>
+<li>Lots of <strong>strange nomenclature</strong>.</li>
+<li>Odd <strong>division of labor</strong> among commands.</li>
+<li>Strange <strong>error messages</strong>.</li>
+</ul>
+
+<p>Especially if you learned it by rote!</p>
+
+<!--
+devs have two learning modes: "quick as possible" and "in-depth"
+git is pretty elegant if you learn it in-depth;
+ it's ugly and weird if you learn it as quick as possible!
+you're not alone!
+-->
+</div>
+      <div class='step' data-y="2000" id="outline">
+    
+<h1>Outline</h1>
+
+<ol>
+<li>The Object Database</li>
+<li>The Index and The Working Copy</li>
+<li>Remotes</li>
+<li>The Git Way</li>
+</ol>
+
+<!--
+here's the plan: start with git's internals, its data structures and concepts;
+then introduce how git sees your code;
+then cover shipping code around the network;
+and finally touch on some more philosophic points.
+-->
+</div>
+      <div class='step' data-x="2000" data-y="1500" data-scale="2" id="object-database-title">
+    
+<h1>The Object Database</h1>
+
+<!--
+this is how git stores things internally.
+everything else in git works by interacting with these constructs.
+-->
+</div>
+      <div class='step' data-x="2000" data-y="2500" id="dotgit">
+    
+<h1>.git</h1>
+
+<p><code class='inline prettyprint'>git</code> stores <em>everything</em> in a single <code class='inline prettyprint'>.git/</code> directory.</p>
+
+<ul>
+<li>local <strong>configuration</strong></li>
+<li>your <strong>full history</strong></li>
+<li><strong>branches</strong>, <strong>tags</strong>, the works</li>
+</ul>
+
+<!--
+git is distributed, so every repository is independent and self-contained.
+just about everything is plain-text, maybe compressed.
+if you're brave, you can drive git using nothing but a text editor!
+-->
+</div>
+      <div class='step' data-x="2000" data-y="3500" id="objects">
+    
+<h1>.git/objects</h1>
+
+<p>at <code class='inline prettyprint'>git</code>&#39;s heart is a filesystem-based <strong>content-addressable database</strong>.
+if you peek inside, here&#39;s what you&#39;ll see:</p>
+<pre><code class='prettyprint bash'>$ find .git/objects/ -type f
+.git/objects/05/b6bc38da385b07652d2d09123719193e77b1b8
+.git/objects/0f/3a0b8da1742a091c822376291abceb01cda3d6
+.git/objects/13/a6fbc30e1e85a2641083427bc4b2075a45ebf3
+.git/objects/15/796067f1a8d405eb728206d06fef3c100ce496
+.git/objects/1b/72f857b356aa5622374593fa78bff9a585a42e
+.git/objects/25/9e166d36e8a9e8a0235af3a1aa2d3a2592ed1a
+</code></pre>
+<!--
+"things" in regular files. each name 40 hex chars, a sha1 checksum of its contents
+deflate-compressed.
+-->
+</div>
+      <div class='step' data-x="2000" data-y="4500" id="blobs">
+    
+<h1>.git/objects: blobs</h1>
+
+<h3>files you store in git become <em>blobs</em></h3>
+
+<p><img src="images/blob.png" alt="blob diagram"></p>
+
+<!--
+format: "blob\t{size in bytes}\n{content}"
+no metadata: no filename, mode, whatever
+-->
+</div>
+      <div class='step' data-x="2000" data-y="5500" id="trees">
+    
+<h1>.git/objects: trees</h1>
+
+<h3>directories are stored as <em>trees</em></h3>
+
+<p><img src="images/tree.png" alt="tree diagram"></p>
+
+<!--
+list of sha1 checksums of other tree objects or blobs
+stored as simple, \0-separated records: kind, type, sha1, name
+-->
+</div>
+      <div class='step' data-x="2000" data-y="6500" id="commits">
+    
+<h1>.git/objects: commits</h1>
+
+<h3><em>commits</em> are snapshots of the root tree at a particular point in time</h3>
+
+<p><img src="images/commit.png" alt="commit diagram"></p>
+
+<!--
+commits point to:
+0..n parent commits;
+a root tree;
+your name, email;
+and your commit message.
+then these form a big graph. all git does is work with this graph!
+-->
+</div>
+      <div class='step' data-x="2000" data-y="7500" id="refs">
+    
+<h1>.git/refs: branches and tags</h1>
+
+<h3><em>branches</em> and <em>tags</em> store a commit&#39;s address</h3>
+
+<p><img src="images/branches.png" alt="branch and tag diagram"></p>
+
+<h3><code class='inline prettyprint'>.git/HEAD</code> is a <em>pointer to a branch</em></h3>
+
+<h2>... and that&#39;s basically everything</h2>
+
+<!--
+literally a text file holding a sha1 hash in hex
+branch: "moves along" when you make new commits
+tag: just a marker
+HEAD tells git the "current branch" so it knows which one to move!
+it is literally a text file that holds "refs/heads/master"
+-->
+</div>
+      <div class='step' data-x="3000" data-y="1500" data-scale="2" id="index-working-copy-title">
+    
+<h1>the Index and the Working Copy</h1>
+</div>
+      <div class='step' data-x="3000" data-y="2500" id="three-trees">
+    
+<h1>the Index and the Working Copy</h1>
+
+<p>while you&#39;re working, there are three places code can be:</p>
+
+<p><img src="images/three-trees.png" alt="three trees"></p>
+
+<p><code class='inline prettyprint'>git status</code> will tell you what&#39;s in each.</p>
+
+<!--
+git has this thing called the "index" between HEAD and your code on disk.
+basically, this lets you make partial commits.
+-->
+</div>
+      <div class='step' data-x="3000" data-y="3500" id="add">
+    
+<h1>Working Copy -&gt; Index</h1>
+
+<p><img src="images/git-add.png" alt="git add"></p>
+
+<p><code class='inline prettyprint'>git add -- path/to/file</code>: stage one file at a time</p>
+
+<p><code class='inline prettyprint'>git add -p</code>: stage diffs</p>
+
+<!--
+"git add" moves changes from your working copy to the index.
+you can stage parts of files, the whole directory
+-->
+</div>
+      <div class='step' data-x="3000" data-y="4500" id="committing">
+    
+<h1>Index -&gt; .git/objects</h1>
+
+<p><img src="images/git-commit.png" alt="git commit"></p>
+
+<p><code class='inline prettyprint'>git commit</code> persists the index in <code class='inline prettyprint'>.git/objects</code>, makes a new commit object,
+and points the <code class='inline prettyprint'>HEAD</code> branch to it.</p>
+
+<!--
+"git commit" makes a new commit out of whatever you've staged with "git add".
+notice that it drags `HEAD` along with it.
+-->
+</div>
+      <div class='step' data-x="3000" data-y="5500" id="checkout">
+    
+<h1>.git/objects --&gt; Working Copy</h1>
+
+<p><img src="images/git-checkout.png" alt="git checkout"></p>
+
+<p><code class='inline prettyprint'>git checkout -- path/to/file</code>: check out a single file</p>
+
+<p><code class='inline prettyprint'>git checkout -p</code>: check out individual diffs</p>
+
+<!--
+"git checkout" turns your working copy (and index) into another state, like
+  a branch.
+if the state you name is a branch, it also moves HEAD!
+"detached HEAD" means "you checked out something that can't move"
+"git reset --hard" is similar: but it yanks HEAD along with you.
+-->
+</div>
+      <div class='step' data-x="2500" data-y="6500" id="naming">
+    
+<h1><em>Sidenote:</em> How to Name Things</h1>
+
+<p>git gives you a bunch of ways to name commits.</p>
+
+<ul>
+<li>giant 40-character sha1 checksums: <code class='inline prettyprint'>ca0d1ce34c23e9c2c875ae7c33a742e12ad1ff82</code></li>
+<li>any unique prefix: <code class='inline prettyprint'>ca0d1c</code></li>
+<li>branches or tags: <code class='inline prettyprint'>master</code>, <code class='inline prettyprint'>my-feature</code></li>
+<li>parent-of operator: <code class='inline prettyprint'>my-feature^</code>, <code class='inline prettyprint'>master^^</code>, <code class='inline prettyprint'>some-branch~5</code></li>
+<li>by time, absolute or relative: <code class='inline prettyprint'>master@{1 day ago}</code></li>
+<li>regexp search on commit messages: <code class='inline prettyprint'>:/broken</code></li>
+</ul>
+
+<p><code class='inline prettyprint'>git help rev-parse</code> has the full list!</p>
+
+<!--
+almost all of the time you use ref names... but these other ones are handy too.
+-->
+</div>
+      <div class='step' data-x="3000" data-y="7500" id="merge">
+    
+<h1>Merging</h1>
+
+<p>a <em>merge</em> is how you unify work from two <em>(or more)</em> branches.</p>
+
+<p>in essence, <code class='inline prettyprint'>git merge</code> means:</p>
+
+<blockquote>
+<p>&quot;Make the branch I&#39;m on right now also include the work of this other thing I name.&quot;</p>
+</blockquote>
+
+<p>what actually happens during the merge depends entirely on <strong>the topography</strong> of history between
+<em>where you are</em> and <em>what you&#39;re merging in</em>.</p>
+
+<!--
+git is really good at merging things.
+a lot of the time, it Just Works. it's still helpful to know what's going on to reason about it.
+commit parent pointers == "this work builds on this other work"
+
+does *not* depend on:
+- timestamps
+- in which clone commits happen
+-->
+</div>
+      <div class='step' data-x="3000" data-y="8500" id="nothing-to-merge">
+    
+<h1>Merging: Trivial Cases</h1>
+
+<h2>&quot;Nothing to merge&quot;</h2>
+
+<p>when the branch you&#39;re on is already a <strong>direct descendant</strong> of the branch you&#39;re merging in.</p>
+
+<p><img src="images/nothing-to-merge.png" alt="nothing to merge"></p>
+
+<!--
+because your parent pointers already lead to the commit you're trying to merge,
+  your work *already includes* the other work.
+so, there's nothing to do.
+-->
+</div>
+      <div class='step' data-x="3000" data-y="9500" id="fast-forward">
+    
+<h1>Merging: Trivial Cases</h1>
+
+<h2>&quot;Fast-forward merge&quot;</h2>
+
+<p>when the branch you&#39;re on is a <strong>direct ancestor</strong> of the branch you&#39;re merging in.</p>
+
+<p><img src="images/fast-forward-merge.png" alt="fast-forward merge"></p>
+
+<!--
+you can suppress this with the `--no-ff` flag (and always make a new merge commit)
+  pull requests on GitHub do this.
+  important sometimes because you *want* to say "i merged this" in your history.
+you can force *only* this to happen with `--ff-only`.
+  merge will fail if it's not trivial.
+  say, if you're on "master" and you never want to have any local work.
+sidenote: these are the only merges that can happen in a bare clone!
+-->
+</div>
+      <div class='step' data-x="3000" data-y="10500" id="recursive">
+    
+<h1>Merging: Recursive</h1>
+
+<p>this is the most common non-trivial case: a <strong>three-way merge</strong>.</p>
+
+<p>the end result is a <strong>new commit</strong> with two parents: the previous <code class='inline prettyprint'>HEAD</code> and the commit that you
+gave to <code class='inline prettyprint'>git merge</code>.</p>
+
+<!--
+the new commit is important:
+- it memorializes that you did this merge in the logs.
+- it makes the history graph correct for further merges!
+other "merge strategies" are available: ours, theirs, octopus
+-->
+</div>
+      <div class='step' data-x="3000" data-y="10500" id="recursive-img">
+    
+<h1>Merging: Recursive</h1>
+
+<p><img src="images/recursive-merge.png" alt="recursive merge"></p>
+
+<!--
+here's how a three-way merge works:
+- walk up commit parent pointers to find the common ancestor
+- compare diffs from the common ancestor to the top, bottom
+- where only one side did a thing: apply that thing
+- where both sides did a thing: conflict time
+then the new commit goes on the end.
+files are tracked by *content*, not *path* (80% similarity)
+- seamless rename detection!
+"recursive" because, if the common ancestor is ambiguous, you do a "shadow merge" with the
+  candidates first
+-->
+</div>
+      <div class='step' data-x="3000" data-y="11500" id="conflict">
+    
+<h1>Merging: Conflicts</h1>
+
+<p>if both lines of work modify the same part of the same file, you get a conflict:</p>
+<pre><code class='prettyprint php'>one
+one
+<<<<<<< HEAD
+one, changed on master
+=======
+one, changed on branch
+>>>>>>> branch
+one
+one
+</code></pre>
+<p>to <em>resolve</em> it:</p>
+
+<ol>
+<li>edit the file to the state you want</li>
+<li><code class='inline prettyprint'>git add path/to/resolved-file</code></li>
+<li><code class='inline prettyprint'>git commit</code> to finalize the merge</li>
+</ol>
+
+<!--
+you can just eye it up, or there are a bunch of tools that make this easier.
+kdiff3, meld, ...
+(or my Atom package ;-) )
+"git status" will remind you how to continue if you forget!
+-->
+</div>
+      <div class='step' data-x="3000" data-y="12500" id="rebase">
+    
+<h1>Rebasing</h1>
+
+<p>an alternative to merging is to <strong>rebase</strong>.</p>
+
+<p><code class='inline prettyprint'>git rebase</code> means:</p>
+
+<blockquote>
+<p>&quot;Make it look like this other work was already done before I started mine.&quot;</p>
+</blockquote>
+
+<!--
+merge v. rebase is a purely aesthetic workflow choice.
+  i'll get into when either is "appropriate" later.
+lots of bikeshedding about this.
+why would you ever do this?
+- it keeps your history legible! a straight line instead of a bunch of back-and-forth.
+- no extra merge commit.
+-->
+</div>
+      <div class='step' data-x="3000" data-y="12500" id="rebase-img">
+    
+<h1>Rebasing</h1>
+
+<p><img src="images/rebasing.png" alt="git rebase"></p>
+
+<!--
+here's how a rebase works:
+- check out the target branch
+- "play back" (meaning create new) commits from ancestor -> former HEAD, one at a time
+- if any conflict: stop; stage; git rebase --continue
+notice that the new commits have different parents than the old ones.
+  so, they have *different names* and are *different commits*
+  rebase *rewrites history!*
+`rebase -i` opens $EDITOR with a list of commits.
+- you can delete some, move them around, smash them together
+- basically a Swiss army knife for mucking with history
+- very very powerful
+- also a good way to check that you're rebasing the right stuff
+-->
+</div>
+      <div class='step' data-x="4000" data-y="1500" data-scale="2" id="remotes-title">
+    
+<h1>Remotes</h1>
+
+<!--
+now we're going to actually touch the network.
+-->
+</div>
+      <div class='step' data-x="4000" data-y="3500" id="network-of-clones">
+    
+<h1>A Network of Clones</h1>
+
+<p>git clones can shuttle work to and from other clones by URL.</p>
+
+<p><img src="images/clone-network.png" alt="network of clones"></p>
+
+<p>some clones are <strong>bare</strong> clones, meaning they have no working copy.</p>
+
+<p>a <strong>remote</strong> is just shorthand for the URL of another clone somewhere.</p>
+
+<!--
+git provides a way to get eventual consistency around this whole graph.
+"work" here means commits and trees and blobs and refs.
+clones with a working copy are for getting work done;
+  bare clones are access points for sharing.
+every git clone carries a pointer to the one that it was created from called "origin."
+the clones in the network don't *have* to share history, but it's helpful when they do!
+-->
+</div>
+      <div class='step' data-x="4000" data-y="4500" id="remote-tracking">
+    
+<h1>remote-tracking branches</h1>
+
+<p>the last-known state of branches in other clones is tracked by special refs
+called <strong>remote-tracking branches</strong>.</p>
+<pre><code class='prettyprint php'>.git/refs/remotes/origin/master
+.git/refs/remotes/origin/otherbranch
+.git/refs/remotes/upstream/master
+.git/refs/remotes/upstream/work-it
+</code></pre>
+<p><em>(usually you can name these as <code class='inline prettyprint'>origin/master</code>)</em></p>
+
+<!--
+these are just refs like your own branches.
+they are read-only! if you check one out directly, you'll see a "detached HEAD" message.
+instead, you can:
+- merge them in
+- rebase on top of them
+-->
+</div>
+      <div class='step' data-x="4000" data-y="5500" id="fetch">
+    
+<h1>git fetch</h1>
+
+<p><code class='inline prettyprint'>git fetch &lt;somewhere&gt; &lt;something&gt;</code></p>
+
+<p><img src="images/git-fetch.png" alt="git-fetch"></p>
+
+<blockquote>
+<p>&quot;download anything new from another clone and update my remote-tracking branches.&quot;</p>
+</blockquote>
+
+<p>does <strong>not</strong> touch local branches until you <code class='inline prettyprint'>git merge origin/master</code>.</p>
+
+<!--
+"somewhere" is a remote name or a full URL.
+"something" is a remote branch name or a "refspec".
+- usually you leave it off to get "everything".
+git fetch will never trash your local work in any way.
+all it does is pull more data in.
+then, you can diff it, merge it, rebase it, whatever your workflow is.
+-->
+</div>
+      <div class='step' data-x="4000" data-y="6500" id="pull">
+    
+<h1>git pull</h1>
+
+<p><code class='inline prettyprint'>git pull &lt;somewhere&gt; &lt;something&gt;</code></p>
+
+<p>convenient shortcut that combines a fetch and merge.</p>
+
+<p>local branches can also <strong>track</strong> another branch, to always pull from the same place.</p>
+
+<!--
+some people will tell you to never pull and always fetch + merge.
+really though, it's just a way to save keystrokes for something you're going to do anyway.
+i would say: don't pull until you understand it :-)
+you can also do `git pull --rebase`, `git pull --ff-only`, `git pull --no-ff`, ...
+there is one difference: remote tracking branches are not updated when you pull directly.
+  instead FETCH_HEAD is.
+tracking is a big source of confusion. really it's just a configuration switch that says:
+"what do i do when someone runs `git pull` without args on this branch?"
+-->
+</div>
+      <div class='step' data-x="4000" data-y="7500" id="push">
+    
+<h1>git push</h1>
+
+<p><code class='inline prettyprint'>git push &lt;somewhere&gt; &lt;something&gt;</code></p>
+
+<p><img src="images/git-push.png" alt="git-push"></p>
+
+<blockquote>
+<p>&quot;send everything new to another clone.&quot;</p>
+</blockquote>
+
+<p>generally, you only push to <em>bare clones</em>.</p>
+
+<!--
+push new work somewhere else, so someone else can pull it later.
+it'll also update a remote ref.
+"-u" or "--upstream" marks this as the new "upstream" and starts tracking it.
+-->
+</div>
+      <div class='step' data-x="5000" data-y="1500" data-scale="2" id="git-way-title">
+    
+<h1>the Git Way</h1>
+
+<!--
+a few more philosophical points about effective git usage.
+-->
+</div>
+      <div class='step' data-x="5000" data-y="2500" id="small-commits">
+    
+<h1>1. many small commits</h1>
+
+<p>in git, <code class='inline prettyprint'>commit</code> <em>records</em> a state, while <code class='inline prettyprint'>push</code> <em>shares</em> a state</p>
+
+<ul>
+<li><p>don&#39;t wait to be &quot;done&quot; before you commit!</p></li>
+<li><p>don&#39;t &quot;shotgun commit&quot;</p></li>
+<li><p>commit <em>complete thoughts</em></p></li>
+<li><p><em>communicate</em> through history</p></li>
+</ul>
+
+<!--
+beginners tend to ignore the index, work for a month, and jam everything in one giant commit.
+all of git's tooling works better when you commit in smaller chunks.
+- following someone's work through a PR
+- git bisect
+- merging works more reliably
+- lots of git commands only work with a clean working directory
+think about committing as "making changes to advance state", not "this state is good"
+also: .git/objects is *write-only* in normal operations.
+the *only way* i have seen lost data in git is when someone is too afraid to commit.
+-->
+</div>
+      <div class='step' data-x="5000" data-y="3500" id="public-history">
+    
+<h1>2. don&#39;t change public history</h1>
+
+<p>a variety of git commands will <em>rewrite history</em>.</p>
+
+<p>don&#39;t rewrite history that&#39;s &quot;public&quot;.</p>
+
+<p>&quot;public&quot; may mean different things depending on your team&#39;s workflow!</p>
+
+<!--
+anything that changes existing commits changes history:
+- git commit --amend, git rebase, git filter-branch are the usual suspects.
+a simple, conservative approach is "don't rebase it if it's pushed".
+really it's "don't rebase it if someone else is using it".
+- rebase "my-feature-branch" all you want; don't rebase "dev"
+- on your own private fork? do whatever you want
+-->
+</div>
+      <div class='step' data-x="5000" data-y="4500" id="branch-like-mad">
+    
+<h1>3. branches are your friends</h1>
+
+<p>git branches are <strong>cheap</strong> and <strong>disposable</strong>.</p>
+
+<p>do separate work on separate branches!</p>
+
+<p>pay attention to <em>where you are</em> when you commit.</p>
+
+<!--
+want to try something quick? make a local branch. doesn't work? kill it
+most git workflows isolate features to individual branches. this is helpful!
+don't make pull requests from master -> master; do my-feature -> master instead.
+- that way you can easily make more before you're accepted!
+- make sure you start new ones at `upstream/master`.
+-->
+</div>
+      <div class='step' data-x="5000" data-y="5500" id="github-flow">
+    
+<h1>4. pick a workflow</h1>
+
+<h2>...and roll with it</h2>
+
+<p>I&#39;m personally fond of <a href="https://guides.github.com/introduction/flow/index.html">the GitHub flow</a>. it&#39;s
+great for continuous delivery or continuous deployment.</p>
+
+<p>alternatives exist! pick one that meets your needs and run with it. things to consider:</p>
+
+<ul>
+<li>what does it mean for code to be in different branches?</li>
+<li>merging or rebasing when it&#39;s time to integrate?</li>
+<li>which is more important: clear history, or easy process?</li>
+<li>how hard is it for newcomers to contribute?</li>
+</ul>
+
+<!--
+prime opportunity for bikeshedding, just like tabs vs. spaces.
+GitHub flow is roughly:
+* master is always ready for deployment. or, actually deployed.
+* feature branch.
+* make pull requests early, for discussion.
+* merge when they're ready.
+"git flow" is another, which is more suited for doing the tagged release thing.
+(much heavier-weight though.)
+-->
+</div>
+      <div class='step' data-x="6000" data-scale="3" data-rotate-y="180" id="questions">
+    
+<h1>Questions?</h1>
+
+<h2>resources and links</h2>
+
+<ul>
+<li><a href="http://git-scm.com/book/en/">Pro Git</a> by Scott Chacon</li>
+<li><a href="https://help.github.com/">GitHub help</a> for git and GitHub help</li>
+<li><a href="http://gitready.com/">git ready</a> for bite-sized git tips and tricks</li>
+<li><a href="https://try.github.io/">try git</a> for an interactive step-by-step tutorial</li>
+</ul>
+
+<p>send me issues or pull requests at:</p>
+
+<p><a href="https://github.com/smashwilson/git-engineroom-tour">https://github.com/smashwilson/git-engineroom-tour</a></p>
+
+      </div>
+    <script src="js/impress.js"></script>
+    <script>impress().init();</script>
+  </body>
+</html>
+    
