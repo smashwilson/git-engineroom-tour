@@ -302,7 +302,7 @@ so, there's nothing to do.
 -->
 
 ---
-=data-x="3000" data-y="8500" id="fast-forward"
+=data-x="3000" data-y="9500" id="fast-forward"
 
 # Merging: Trivial Cases
 
@@ -323,7 +323,7 @@ sidenote: these are the only merges that can happen in a bare clone!
 -->
 
 ---
-=data-x="3000" data-y="9500" id="recursive"
+=data-x="3000" data-y="10500" id="recursive"
 
 # Merging: Recursive
 
@@ -340,7 +340,7 @@ other "merge strategies" are available: ours, theirs, octopus
 -->
 
 ---
-=data-x="3000" data-y="9500" id="recursive-img"
+=data-x="3000" data-y="10500" id="recursive-img"
 
 # Merging: Recursive
 
@@ -360,7 +360,7 @@ files are tracked by *content*, not *path* (80% similarity)
 -->
 
 ---
-=data-x="3000" data-y="10500" id="conflict"
+=data-x="3000" data-y="11500" id="conflict"
 
 # Merging: Conflicts
 
@@ -392,7 +392,7 @@ kdiff3, meld, ...
 -->
 
 ---
-=data-x="3000" data-y="11500" id="rebase"
+=data-x="3000" data-y="12500" id="rebase"
 
 # Rebasing
 
@@ -412,7 +412,7 @@ why would you ever do this?
 -->
 
 ---
-=data-x="3000" data-y="11500" id="rebase-img"
+=data-x="3000" data-y="12500" id="rebase-img"
 
 # Rebasing
 
