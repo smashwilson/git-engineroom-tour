@@ -613,7 +613,7 @@ really it's "don't rebase it if someone else is using it".
 
 # 3. branches are your friends
 
-git branches are cheap and disposable.
+git branches are **cheap** and **disposable**.
 
 do separate work on separate branches!
 
@@ -640,6 +640,7 @@ alternatives exist! pick one that meets your needs and run with it. things to co
 
 * what does it mean for code to be in different branches?
 * merging or rebasing when it's time to integrate?
+* which is more important: clear history, or easy process?
 * how hard is it for newcomers to contribute?
 
 <!--
