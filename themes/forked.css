@@ -129,7 +129,7 @@ body {
 h1 {
   font-weight: 900;
   font-size: 80px;
-  margin: 10px 0 20px 0;
+  margin: 10px 0 60px 0;
   text-align: center;
 }
 
@@ -161,6 +161,7 @@ code {
   word-wrap: break-word;
   font-size: 30px;
   line-height: 36px;
+  padding: 2px 5px;
 }
 
 sub, sup {
@@ -200,9 +201,32 @@ blockquote {
   font-style: italic;
 }
 
+/* Title slide */
+
+#title h1 {
+  margin-bottom: 50px;
+}
+
+#title p:nth-child(2) {
+  margin: 15px 0;
+  text-align: center;
+}
+
+#title p:nth-child(2) img {
+  width: 80%;
+}
+
+#title p:nth-child(3) {
+  float: right;
+}
+
+/* Other title cards */
+
 #object-database-title h1, #index-working-copy-title h1, #remotes-title h1, #git-way-title h1 {
   margin: 10% auto;
 }
+
+/* The Object Database */
 
 #objects p {
   margin: 2em 0;
@@ -220,12 +244,52 @@ blockquote {
   float: right;
 }
 
+/* The Index and the Working Copy */
+
 #three-trees p:nth-child(3), #add p:nth-child(2), #committing p:nth-child(2),
 #checkout p:nth-child(2) {
   text-align: center;
 }
 
-#merge h1, #nothing-to-merge h1, #fast-forward h1, #recursive h1, #recursive-img h1,
-#rebase h1, #rebase-img h1, #remote-tracking h1, #pull h1 {
-  margin-bottom: 1em;
+#nothing-to-merge img {
+  float: right;
+}
+
+#fast-forward p:nth-child(4) {
+  text-align: center;
+}
+
+#fast-forward img {
+  width: 45%;
+}
+
+#recursive-img p:nth-child(2), #rebase-img p:nth-child(2) {
+  text-align: center;
+}
+#recursive-img img, #recursive-img img {
+  width: 60%;
+}
+
+/* Remotes */
+
+#network-of-clones p {
+  text-align: center;
+}
+
+#remote-tracking p:nth-child(4) {
+  float: right;
+}
+
+#fetch p:nth-child(2), #fetch p:nth-child(3) {
+  text-align: center;
+}
+#fetch p:nth-child(2) {
+  margin: 40px auto;
+}
+
+/* The Git Way */
+
+#github-flow h2 {
+  font-style: italic;
+  text-align: right;
 }
