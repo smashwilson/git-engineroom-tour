@@ -4,9 +4,7 @@ These are my slides for a beginner to intermediate-level `git` course. It's aime
 at developers and writers who use git from day to day, but find it puzzling and
 opaque.
 
-## Read It
-
-I'll host it on this repository's GitHub Page once I get something together.
+[Read it here!](http://smashwilson.github.io/git-engineroom-tour)
 
 ## Build It
 
