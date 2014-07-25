@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+# Build the site, then commit the new contents of presentation/ to the gh-pages branch.
+
+set -e
+
+# Die if you have a dirty working copy.
+if [ -n "$(git status --porcelain)" ]; then
+  echo 'Please commit your changes first.'
+  exit 1
+fi
+
+cd $(dirname `which $0`)
+cd ..
+ROOT=$(pwd)
+
+# Delete any previous build results.
+rm -f ${TARBALL}
+
+${ROOT}/script/build
+
+# Switch branches and unpack the presentation.
+cd ${ROOT}
+git checkout gh-pages
+git pull --rebase origin gh-pages
+rm -r css/ images/ js/ index.html
+mv ${ROOT}/presentation/* ${ROOT}
+git add --all ${ROOT}
+git commit -m "Publishing changes to GitHub pages."
+git push origin gh-pages
+
+# Success. Switch back to master.
+git checkout master
