@@ -340,7 +340,7 @@ other "merge strategies" are available: ours, theirs, octopus
 -->
 
 ---
-=data-x="3000" data-y="10500" id="recursive-img"
+=data-x="3000" data-y="11500" id="recursive-img"
 
 # Merging: Recursive
 
@@ -360,7 +360,7 @@ files are tracked by *content*, not *path* (80% similarity)
 -->
 
 ---
-=data-x="3000" data-y="11500" id="conflict"
+=data-x="3000" data-y="12500" id="conflict"
 
 # Merging: Conflicts
 
@@ -392,7 +392,7 @@ kdiff3, meld, ...
 -->
 
 ---
-=data-x="3000" data-y="12500" id="rebase"
+=data-x="3000" data-y="13500" id="rebase"
 
 # Rebasing
 
@@ -412,7 +412,7 @@ why would you ever do this?
 -->
 
 ---
-=data-x="3000" data-y="12500" id="rebase-img"
+=data-x="3000" data-y="14500" id="rebase-img"
 
 # Rebasing
 
