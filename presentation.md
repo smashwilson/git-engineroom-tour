@@ -265,7 +265,7 @@ almost all of the time you use ref names... but these other ones are handy too.
 
 # Merging
 
-a *merge* is how you unify work from two *(or more)* branches.
+a **merge** is how you unify work from two *(or more)* branches.
 
 in essence, `git merge` means:
 
