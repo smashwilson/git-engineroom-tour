@@ -67,7 +67,7 @@ everything else in git works by interacting with these constructs.
 
 # .git
 
-`git` stores *everything* in a single `.git/` directory.
+git stores *everything* in a single `.git/` directory.
 
 * local **configuration**
 * your **full history**
@@ -84,7 +84,7 @@ if you're brave, you can drive git using nothing but a text editor!
 
 # .git/objects
 
-at `git`'s heart is a filesystem-based **content-addressable database**.
+at git's heart is a filesystem-based **content-addressable database**.
 if you peek inside, here's what you'll see:
 
 ```bash
