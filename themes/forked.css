@@ -300,6 +300,15 @@ blockquote {
 
 /* The Git Way */
 
+#small-commits > p, #public-history > p, #branch-like-mad > p, #github-flow > p {
+  margin-left: 40px;
+  margin-right: 40px
+}
+
+#public-history h1, #branch-like-mad h1 {
+  margin-bottom: 90px;
+}
+
 #github-flow h2 {
   font-style: italic;
   text-align: right;
