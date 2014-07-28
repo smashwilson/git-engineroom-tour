@@ -287,6 +287,17 @@ blockquote {
   margin: 40px auto;
 }
 
+#pull p:nth-child(2) {
+  text-align: center;
+}
+
+#push p:nth-child(2), #push p:nth-child(3) {
+  text-align: center;
+}
+#push p:nth-child(3) {
+  margin: 40px auto;
+}
+
 /* The Git Way */
 
 #github-flow h2 {
