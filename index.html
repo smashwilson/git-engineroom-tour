@@ -91,7 +91,7 @@ everything else in git works by interacting with these constructs.
     
 <h1>.git</h1>
 
-<p><code class='inline prettyprint'>git</code> stores <em>everything</em> in a single <code class='inline prettyprint'>.git/</code> directory.</p>
+<p>git stores <em>everything</em> in a single <code class='inline prettyprint'>.git/</code> directory.</p>
 
 <ul>
 <li>local <strong>configuration</strong></li>
@@ -109,7 +109,7 @@ if you're brave, you can drive git using nothing but a text editor!
     
 <h1>.git/objects</h1>
 
-<p>at <code class='inline prettyprint'>git</code>&#39;s heart is a filesystem-based <strong>content-addressable database</strong>.
+<p>at git&#39;s heart is a filesystem-based <strong>content-addressable database</strong>.
 if you peek inside, here&#39;s what you&#39;ll see:</p>
 <pre><code class='prettyprint bash'>$ find .git/objects/ -type f
 .git/objects/05/b6bc38da385b07652d2d09123719193e77b1b8
@@ -278,7 +278,7 @@ almost all of the time you use ref names... but these other ones are handy too.
     
 <h1>Merging</h1>
 
-<p>a <em>merge</em> is how you unify work from two <em>(or more)</em> branches.</p>
+<p>a <strong>merge</strong> is how you unify work from two <em>(or more)</em> branches.</p>
 
 <p>in essence, <code class='inline prettyprint'>git merge</code> means:</p>
 
@@ -351,7 +351,7 @@ the new commit is important:
 other "merge strategies" are available: ours, theirs, octopus
 -->
 </div>
-      <div class='step' data-x="3000" data-y="10500" id="recursive-img">
+      <div class='step' data-x="3000" data-y="11500" id="recursive-img">
     
 <h1>Merging: Recursive</h1>
 
@@ -370,7 +370,7 @@ files are tracked by *content*, not *path* (80% similarity)
   candidates first
 -->
 </div>
-      <div class='step' data-x="3000" data-y="11500" id="conflict">
+      <div class='step' data-x="3000" data-y="12500" id="conflict">
     
 <h1>Merging: Conflicts</h1>
 
@@ -400,7 +400,7 @@ kdiff3, meld, ...
 "git status" will remind you how to continue if you forget!
 -->
 </div>
-      <div class='step' data-x="3000" data-y="12500" id="rebase">
+      <div class='step' data-x="3000" data-y="13500" id="rebase">
     
 <h1>Rebasing</h1>
 
@@ -421,7 +421,7 @@ why would you ever do this?
 - no extra merge commit.
 -->
 </div>
-      <div class='step' data-x="3000" data-y="12500" id="rebase-img">
+      <div class='step' data-x="3000" data-y="14500" id="rebase-img">
     
 <h1>Rebasing</h1>
 
